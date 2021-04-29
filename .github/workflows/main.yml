@@ -8,6 +8,7 @@
 # 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, REGISTRY_HOSTNAME and DEPLOYMENT_NAME environment variables (below).
 
 name: Build and Deploy to GKE
+environment: default
 
 on:
   push:
@@ -25,7 +26,6 @@ env:
   # GCP_PROJECT_ID: otters-cc
 
 jobs:
-  environment: default
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
