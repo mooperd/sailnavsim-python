@@ -1,0 +1,127 @@
+{% extends "layout.jinja2" %}
+
+{#{% block pagestyles %}
+  <link href="{{ url_for('static', filename='dist/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.typekit.net/sus7rlu.css">
+{% endblock %}#}
+
+{% block content %}
+<div class="container">
+  <h1>{{ body }}</h1>
+  
+  {% if current_user.is_authenticated %}
+    <p>Hi {{ current_user.name }}!</p>
+
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+
+      <article class="alert message {{ category }}">
+        <div class="alert message-header">
+          <p>Message</p>
+        </div>
+        <div class="alert message-body">
+          {{ message }}
+        </div>
+      </article>
+
+    {% endfor %}
+
+    <h1>Races</h1>
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Boat Type</th>
+          <th>Start Time</th>
+          <th>Start Location</th>
+          <th>Finish Location</th>
+          <th>Private</th>
+          <th>ID</th>
+        </tr>
+        {% for item in races %}
+        <tr>
+          <td><a href="{{ url_for('pages_bp.race', race_id=item.id) }}">{{item.name}}</a></td>
+          <td>{{item.boat_type.name}}</td>
+          <td>{{item.start_time}}</td>
+          <td>{{item.start_location.name}}</td>
+          <td>{{item.finish_location.name}}</td>
+          <td>{{item.private}}</td>
+          <td><a href="{{ url_for('pages_bp.race', race_id=item.id) }}">{{item.id}}</a></td>
+        </tr>
+        {% endfor %}
+      <tr class="is-selected">
+      <form method="POST" action="{{ url_for('api_bp.race') }}">
+      {{ form.csrf_token }}
+
+      <td><div>
+        {{ form.name(class_="input", type_="text", placeholder='Race Name') }}
+        {% if form.name.errors %}
+          <ul class="errors">
+            {% for error in form.email.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </td>
+
+      <td><div class="select">
+        {{ form.boat_type() }}
+        {% if form.boat_type.errors %}
+          <ul class="errors">
+            {% for error in form.boat_type.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div></td>
+
+      <td><div>
+        {{ form.start_time(class_="input", placeholder='0') }}
+        {% if form.start_time.errors %}
+          <ul class="errors">
+            {% for error in form.start_time.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div></td>
+
+      <td><div class="select">
+        {{ form.start_location(class_="select", placeholder='0.0000') }}
+        {% if form.start_location.errors %}
+          <ul class="errors">
+            {% for error in form.start_location.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div></td>
+
+      <td><div class="select">
+        {{ form.finish_location(class_="select", placeholder='0.0000') }}
+        {% if form.finish_location.errors %}
+          <ul class="errors">
+            {% for error in form.finish_location.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div></td>
+
+      <td><label class="checkbox">
+        {{ form.private(type="checkbox", placeholder='0') }}
+        {% if form.private.errors %}
+          <ul class="errors">
+            {% for error in form.private.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </fieldset></td>
+      
+      <td><div class="button">
+        {{ form.submit }}
+      </div></td></tr>
+      </form>
+      </table>
+
+      
+
+    <a href="{{ url_for('pages_bp.logout') }}">Log out</a>
+    </div>
+  {% endif %}
+
+{% endblock %}

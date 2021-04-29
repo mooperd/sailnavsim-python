@@ -1,0 +1,11 @@
+CREATE ROLE sailnavsim WITH
+        NOLOGIN
+        NOSUPERUSER
+        CREATEDB
+        NOCREATEROLE
+        INHERIT
+        NOREPLICATION
+        CONNECTION LIMIT -1
+        PASSWORD 'xxxxxx';
+
+        
