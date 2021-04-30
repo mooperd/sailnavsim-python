@@ -120,3 +120,10 @@ def logout():
     """User log-out logic."""
     logout_user()
     return redirect(url_for('auth_bp.login'))
+
+
+@api_bp.route("/healthz")
+def healthz():
+    """Health check"""
+    return "OK" 200
+
