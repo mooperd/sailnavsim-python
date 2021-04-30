@@ -1,7 +1,7 @@
 # start.sh
 
 
-source /home/andrew/flask-sailnavsim/myenv/bin/activate
+source /home/andrew/flask-sailnavsim/.venv/bin/activate
 rm /home/andrew/flask-sailnavsim/sailnavsim_web/meow.db
 
 export SECRET_KEY=meow

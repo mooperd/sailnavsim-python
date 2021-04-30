@@ -125,5 +125,5 @@ def logout():
 @api_bp.route("/healthz")
 def healthz():
     """Health check"""
-    return "OK" 200
+    return "OK"
 

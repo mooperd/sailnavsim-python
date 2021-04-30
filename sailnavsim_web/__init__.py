@@ -20,6 +20,7 @@ def create_app():
     login_manager.init_app(app)
 
     with app.app_context():
+        from . import root
         from . import api
         from . import pages
         from . import auth
@@ -27,6 +28,7 @@ def create_app():
         from .import_data import import_boats, import_users, import_locations, import_races, import_boats, import_boat_types
 
         # Register Blueprints
+        app.register_blueprint(root.root_bp)
         app.register_blueprint(api.api_bp)
         app.register_blueprint(pages.pages_bp)
         app.register_blueprint(auth.auth_bp)
