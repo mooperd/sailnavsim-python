@@ -53,8 +53,8 @@ jobs:
         echo "HOSTNAME=$HOSTNAME" >> $GITHUB_ENV
         echo "CERT_NAME=$CERT_NAME" >> $GITHUB_ENV
         # app secrets
-        echo "${{ secrets.SQLALCHEMY_DATABASE_URI }}" >> $GITHUB_ENV
-        echo "${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+        echo "SQLALCHEMY_DATABASE_URI=${{ secrets.SQLALCHEMY_DATABASE_URI }}" >> $GITHUB_ENV
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
 
     - name: Checkout
       uses: actions/checkout@v2
