@@ -65,7 +65,7 @@ def login():
         if user and user.check_password(password=form.password.data):
             login_user(user)
             next_page = request.args.get('next')
-            return redirect(next_page or url_for('pages_bp.dashboard'))
+            return redirect(next_page or url_for('pages_bp.races'))
         flash('Invalid username/password combination')
         return redirect(url_for('auth_bp.login'))
     return render_template(

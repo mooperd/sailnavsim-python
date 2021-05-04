@@ -30,7 +30,7 @@
   {% block pagestyles %}{% endblock %}
 </head>
 
-<body class="{{ template }}">
+<body>
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
@@ -81,23 +81,46 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
+            {% if current_user.is_authenticated %}
+            <p>Hi {{ current_user.name }}!</p>
+            <a href="{{ url_for('pages_bp.logout') }}" class="button is-danger">
+            <strong>Log Out</strong>
+            </a>
           <a class="button is-light">
             Log in
           </a>
+          {% else %}
+            <p>You are not logged in</p>
+            <a href="{{ url_for('auth_bp.signup')}}" class="button is-primary">
+            <strong>Sign up</strong>
+          </a>
+          <a href="{{ url_for('auth_bp.login')}}" class="button is-light">
+            Log in
+          </a>
+          {% endif %}
         </div>
       </div>
     </div>
   </div>
 </nav>
-
 <div class="container">
-  {% block content %}{% endblock %}
-</div>
-<script src="{{ url_for('static', filename='dist/js/main.min.js') }}"></script>
-{% block additionalscripts %}{% endblock %}
-</body>
+  <h1>{{ body }}</h1>
 
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+
+      <article class="alert message {{ category }}">
+        <div class="alert message-header">
+          <p>Message</p>
+        </div>
+        <div class="alert message-body">
+          {{ message }}
+        </div>
+      </article>
+
+    {% endfor %}
+  
+  {% block content %}
+  {% endblock %}
+</div>
+</body>
 </html>

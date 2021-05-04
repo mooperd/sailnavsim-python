@@ -1,16 +1,6 @@
 {% extends "layout.jinja2" %}
 
-
-{#{% block pagestyles %}
-  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
-{% endblock %}#}
-
 {% block content %}
-  <div class="form-wrapper">
-
-    <div class="logo">
-      <img src="{{ url_for('static', filename='dist/img/logo.png') }}" alt="logo"/>
-    </div>
 
     {% for message in get_flashed_messages() %}
       <div class="alert alert-warning">
@@ -19,35 +9,43 @@
       </div>
     {% endfor %}
 
-    <h1>Log In</h1>
 
-    <form method="POST" action="/login">
+    <form class="box" method="POST" action="/login">
+
       {{ form.csrf_token }}
 
-      <fieldset class="email">
-        {{ form.email.label }}
-        {{ form.email(placeholder='youremail@example.com') }}
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+          {{ form.email(class_="input", placeholder='youremail@example.com') }}
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
         {% if form.email.errors %}
-          <ul class="errors">
-            {% for error in form.email.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </div>
+        {% for error in form.email.errors %}
+        <p class="help is-danger">This email is invalid</p>
+        {% endfor %}
         {% endif %}
-      </fieldset>
+      </div>
 
-      <fieldset class="password">
-        {{ form.password.label }}
-        {{ form.password }}
-        {% if form.email.errors %}
-          <ul class="errors">
-            {% for error in form.password.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
-        {% endif %}
-      </fieldset>
+      <div class="field">
+      <label class="label">Password</label>
+        <p class="control has-icons-left">
+          {{ form.password(class_="input", placeholder='password') }}
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+      </div>
 
-      <div class="submit-button">
-        {{ form.submit }}
+      <div class="field">
+        <p class="control">
+          {{ form.submit(class_="button is-success") }}
+        </p>
       </div>
 
       <div class="login-signup">

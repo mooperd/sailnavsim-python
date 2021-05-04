@@ -7,24 +7,6 @@
 {% endblock %}#}
 
 {% block content %}
-<div class="container">
-  <h1>{{ body }}</h1>
-  
-  {% if current_user.is_authenticated %}
-    <p>Hi {{ current_user.name }}!</p>
-
-    {% for category, message in get_flashed_messages(with_categories=true) %}
-
-      <article class="alert message {{ category }}">
-        <div class="alert message-header">
-          <p>Message</p>
-        </div>
-        <div class="alert message-body">
-          {{ message }}
-        </div>
-      </article>
-
-    {% endfor %}
 
     <h1>Races</h1>
       <table class="table">
@@ -122,6 +104,5 @@
 
     <a href="{{ url_for('pages_bp.logout') }}">Log out</a>
     </div>
-  {% endif %}
 
 {% endblock %}
