@@ -35,7 +35,7 @@ def signup():
             db.session.add(user)
             db.session.commit()  # Create new user
             login_user(user)  # Log in as newly created user
-            return redirect(url_for('pages_bp.dashboard'))
+            return redirect(url_for('pages_bp.races'))
         flash('A user already exists with that email address.')
     return render_template(
         'signup.jinja2',
