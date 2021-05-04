@@ -9,7 +9,7 @@ root_bp = Blueprint(
 
 @root_bp.route("/")
 def root():
-    """Health check"""
+    """Root route"""
     return redirect(url_for('pages_bp.races'))
 
 

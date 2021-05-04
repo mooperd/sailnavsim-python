@@ -56,7 +56,7 @@ def login():
     """
     # Bypass if user is logged in
     if current_user.is_authenticated:
-        return redirect(url_for('pages_bp.dashboard'))
+        return redirect(url_for('pages_bp.races'))
 
     form = LoginForm()
     # Validate login attempt
