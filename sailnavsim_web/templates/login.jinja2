@@ -2,14 +2,9 @@
 
 {% block content %}
 
-    {% for message in get_flashed_messages() %}
-      <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-      </div>
-    {% endfor %}
-
-
+<section class="section is-medium">
+  <article class="panel is-primary">
+    <p class="panel-heading">Login</p>
     <form class="box" method="POST" action="/login">
 
       {{ form.csrf_token }}
@@ -53,5 +48,6 @@
       </div>
 
     </form>
-  </div>
+  </article>
+</section>
 {% endblock %}

@@ -12,27 +12,6 @@ pages_bp = Blueprint(
     url_prefix='/pages'
 )
 
-@pages_bp.route('/', methods=['GET'])
-@login_required
-def dashboard():
-    """Logged-in User Dashboard."""
-    users = db.session.query(User).all()
-    races = db.session.query(BoatRace).all()
-    boats = db.session.query(User).all()
-    for user in users:
-        print(user)
-    return render_template(
-        'dashboard.jinja2',
-        title='Flask-Login Tutorial.',
-        template='dashboard-template',
-        current_user=current_user,
-        body="You are now logged in!",
-        users=users,
-        races=races,
-        boats=boats
-    )
-
-
 @pages_bp.route('/races', methods=['GET'])
 @login_required
 def races():

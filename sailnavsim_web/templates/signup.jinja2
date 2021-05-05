@@ -1,85 +1,75 @@
 {% extends "layout.jinja2" %}
 
-{% block pagestyles %}
-  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
-{% endblock %}
-
 {% block content %}
-  <div class="form-wrapper">
-
-    <div class="logo">
-      <img src="{{ url_for('static', filename='dist/img/logo.png') }}" alt="logo"/>
-    </div>
-
-    {% for message in get_flashed_messages() %}
-      <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-      </div>
-    {% endfor %}
-
-    <h1>Sign Up</h1>
-
-    <form method="POST" action="/signup">
+<section class="section is-medium">
+  <article class="panel is-primary">
+  <p class="panel-heading">Signup</p>
+    <form class="box" method="POST" action="/signup">
       {{ form.csrf_token }}
 
-      <fieldset class="name">
-        {{ form.name.label }}
-        {{ form.name(placeholder='John Smith') }}
+      <div class="field">
+        <label class="label">Name</label>
+        {{ form.name(class_="input", placeholder='John Smith') }}
         {% if form.name.errors %}
-          <ul class="errors">
-            {% for error in form.email.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </div>
+        {% for error in form.email.errors %}
+        <p class="help is-danger">{{ error }}</p>
+        {% endfor %}
         {% endif %}
-      </fieldset>
-
-      <fieldset class="email">
-        {{ form.email.label }}
-        {{ form.email(placeholder='youremail@example.com') }}
-        {% if form.email.errors %}
-          <ul class="errors">
-            {% for error in form.email.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
-        {% endif %}
-      </fieldset>
-
-      <fieldset class="password">
-        {{ form.password.label }}
-        {{ form.password }}
-        {% if form.password.errors %}
-          <ul class="errors">
-            {% for error in form.password.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
-        {% endif %}
-      </fieldset>
-
-      <fieldset class="confirm">
-        {{ form.confirm.label }}
-        {{ form.confirm }}
-        {% if form.confirm.errors %}
-          <ul class="errors">
-            {% for error in form.confirm.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
-        {% endif %}
-      </fieldset>
-
-      <fieldset class="website">
-        {{ form.website.label }}
-        {{ form.website(placeholder='http://example.com') }}
-      </fieldset>
-
-      <div class="submit-button">
-        {{ form.submit }}
       </div>
 
-    </form>
+      <div class="field">
+        <label class="label">Email</label>
+        {{ form.email(class_="input", placeholder='youremail@example.com') }}
+        {% if form.email.errors %}
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </div>
+        {% for error in form.email.errors %}
+        <p class="help is-danger">{{ error }}</p>
+        {% endfor %}
+        {% endif %}
+      </div>
 
-    <div class="login-signup">
-      <span>Already have an account? <a href="{{ url_for('auth_bp.login') }}">Log in.</a></span>
-    </div>
-  </div>
+      <div class="field">
+        <label class="label">Password</label>
+        {{ form.password(class_="input", placeholder='password') }}
+        {% if form.password.errors %}
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </div>
+        {% for error in form.password.errors %}
+        <p class="help is-danger">{{ error }}</p>
+        {% endfor %}
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label class="label">Password Confirm</label>
+        {{ form.confirm(class_="input", placeholder='password confirm') }}
+        {% if form.confirm.errors %}
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </div>
+        {% for error in form.confirm.errors %}
+        <p class="help is-danger">{{ error }}</p>
+        {% endfor %}
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <p class="control">
+        {{ form.submit(class_="button is-success") }}
+        </p>
+      </div>
+    </form>
+  </article>
+</section>
+
 {% endblock %}

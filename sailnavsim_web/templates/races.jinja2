@@ -1,13 +1,7 @@
 {% extends "layout.jinja2" %}
 
-{#{% block pagestyles %}
-  <link href="{{ url_for('static', filename='dist/css/dashboard.css') }}" rel="stylesheet" type="text/css">
-  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://use.typekit.net/sus7rlu.css">
-{% endblock %}#}
-
 {% block content %}
-
+<div>
     <h1>Races</h1>
       <table class="table">
         <tr>
@@ -100,9 +94,8 @@
       </form>
       </table>
 
-      
-
     <a href="{{ url_for('pages_bp.logout') }}">Log out</a>
     </div>
+</div>
 
 {% endblock %}
