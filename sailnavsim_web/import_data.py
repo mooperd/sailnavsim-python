@@ -39,7 +39,6 @@ def import_users():
 
         for user in users:
             _user = User()
-            _user.id = user["id"]
             _user.name = user["name"]
             _user.email = user["email"]
             _user.password = user["password"]
