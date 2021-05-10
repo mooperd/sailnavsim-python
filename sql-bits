@@ -8,4 +8,30 @@ CREATE ROLE sailnavsim WITH
         CONNECTION LIMIT -1
         PASSWORD 'xxxxxx';
 
-        
+
+# Work out distances to finish lines.
+SELECT id, lat, lon, dis FROM lat_longs WHERE
+        ST_Distance(
+        format('SRID=4326;POINT(0 0)')::geometry,
+        format('SRID=4326;POINT(%s %s)', lat_longs.lat, lat_longs.lon )::geometry) < lat_longs.dis;
+
+DROP TABLE IF EXISTS lat_longs;
+
+## Put data into database
+CREATE TABLE lat_longs (
+  id              SERIAL PRIMARY KEY,
+  lat             REAL NOT NULL,
+  lon             REAL NOT NULL,
+  dis             REAL NOT NULL
+);
+
+
+/*
+insert into lat_longs(lat, lon, dis)
+select g.lat, g.lon, random()
+from generate_series(0, 100, 1) as g(lat), generate_series(0, 100, 1) as g(lon);
+*/
+
+
+insert into lat_longs(lat, lon, dis)
+select generate_series(0, 100, 0.001), generate_series(0, 100, 0.001), random();        
