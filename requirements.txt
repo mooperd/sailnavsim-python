@@ -1,3 +1,4 @@
+pyodbc
 gunicorn
 petname
 psycopg2-binary

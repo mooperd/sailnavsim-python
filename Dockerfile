@@ -3,6 +3,7 @@ WORKDIR /app
 
 COPY . /app
 
+RUN apt-get update && apt-get install unixodbc-dev -y 
 RUN pip install -r requirements.txt
 
 EXPOSE 8080
